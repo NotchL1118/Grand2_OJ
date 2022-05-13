@@ -19,35 +19,38 @@ bool cmp(const Match &a, const Match &b)
 }
 
 int m,n;
-bool used[N];
+
 
 int main()
 {
-    cin >> m >> n;
-    for(int i = 1; i <= n; i ++ )
-        scanf("%d",&match[i].t);
-    for(int i = 1; i <= n; i ++ )
-        scanf("%d",&match[i].v);
-
-    sort(match+1,match +1 + n, cmp);
-
-    for(int i = 1; i <= n; i ++ )
+    while(cin >> m >> n)
     {
-        for(int j = match[i].t; j >= 1; j --) //j >= 1因为j是各个游戏的规定时间，是从1开始的
+        bool used[N] = {false};
+        for(int i = 1; i <= n; i ++ )
+            scanf("%d",&match[i].t);
+        for(int i = 1; i <= n; i ++ )
+            scanf("%d",&match[i].v);
+
+        sort(match+1,match +1 + n, cmp);
+
+        for(int i = 1; i <= n; i ++ )
         {
-            if(!used[j])
+            for(int j = match[i].t; j >= 1; j --) //j >= 1因为j是各个游戏的规定时间，是从1开始的
             {
-                used[j] = true;
-                match[i].v = 0; //这件事做了，罚款为0
-                break;
+                if(!used[j])
+                {
+                    used[j] = true;
+                    match[i].v = 0; //这件事做了，罚款为0
+                    break;
+                }
             }
-        }
 
+        }
+        for(int i = 1; i <= n; i ++ )
+        {
+            m -= match[i].v;
+        }
+        cout << m << endl;
     }
-    for(int i = 1; i <= n; i ++ )
-    {
-        m -= match[i].v;
-    }
-    cout << m << endl;
     return 0;
 }
