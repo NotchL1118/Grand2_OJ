@@ -19,13 +19,13 @@ int dis[N];
 int result;
 
 //求n与前面一个离n最近的2的次方数的距离
-int distance(int n)   //说是距离，我感觉是求操作数,下面+1就说得通了
+int distance(int n)   
 {
     for(int i = 0; i < n; i ++ )
         if(pow(2,i) == n)
             return 0;
         else if(pow(2,i) > n)
-            return n - pow(2,i-1) + 1;  //没明白为什么不加1，下面result >= dis[i]是错的，
+            return n - pow(2,i-1) + 1;  //result ++ 操作的是最后一步，所以这里要加1
 }
 
 int main()
